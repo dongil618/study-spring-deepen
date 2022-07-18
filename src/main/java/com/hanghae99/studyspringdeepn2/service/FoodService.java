@@ -25,27 +25,27 @@ public class FoodService {
     public List<Food> registerFoods(Long restaurantId, @Valid List<FoodRequestDto> requestDto){
         List<Food> foods = new ArrayList<>();
         Restaurant restaurant = restaurantRepository.findById(restaurantId).get();
-        for(int i =0; i < requestDto.size(); i++){
-            String name = requestDto.get(i).getName();
-            Integer price = requestDto.get(i).getPrice();
-            Food food = new Food(restaurant, name, price);
-            if(price < 0){
+        for (FoodRequestDto foodRequestDto : requestDto) {
+            String name = foodRequestDto.getName();
+            Integer price = foodRequestDto.getPrice();
+            if (price < 100) {
                 throw new IllegalArgumentException("허용된 값이 아닙니다.");
             }
-            if(price > 1000000){
+            if (price > 1000000) {
                 throw new IllegalArgumentException("허용된 값이 아닙니다.");
             }
             // minOrderPrice는 100원 단위
-            if(price % priceUnit != 0){
+            if (price % priceUnit != 0) {
                 throw new IllegalArgumentException(priceUnit + "단위만 입력가능합니다.");
             }
             Optional<Food> foodsInRestaurant = foodRepository.findFoodByRestaurantAndName(restaurant, name);
-            if(foodsInRestaurant.isPresent()){
+            if (foodsInRestaurant.isPresent()) {
                 throw new IllegalArgumentException("중복된 메뉴입니다.");
             }
+            Food food = new Food(restaurant, name, price);
             foods.add(food);
-            System.out.println("name : " + requestDto.get(i).getName());
-            System.out.println("price : " + requestDto.get(i).getPrice());
+            System.out.println("name : " + foodRequestDto.getName());
+            System.out.println("price : " + foodRequestDto.getPrice());
         }
         return foodRepository.saveAll(foods);
     }
