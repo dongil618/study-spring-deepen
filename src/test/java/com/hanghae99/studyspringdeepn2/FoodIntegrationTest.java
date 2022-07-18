@@ -2,7 +2,6 @@ package com.hanghae99.studyspringdeepn2;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.hanghae99.studyspringdeepn2.dto.FoodRequestDto;
 import lombok.*;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,7 +69,6 @@ class FoodIntegrationTest {
                 .deliveryFee(1000)
                 .build();
 
-
         String requestBody = mapper.writeValueAsString(restaurantRequest);
         HttpEntity<String> request = new HttpEntity<>(requestBody, headers);
 
@@ -115,7 +113,7 @@ class FoodIntegrationTest {
                     "/restaurant/" + restaurantId + "/food/register",
                     request,
                     Object.class);
-
+            System.out.println("response.getBody() : " + response.getBody());
             // then
             assertEquals(HttpStatus.OK, response.getStatusCode());
             assertNull(response.getBody());
@@ -134,12 +132,8 @@ class FoodIntegrationTest {
             // 음식4 추가
             foodsRequest.add(food4);
 
-            System.out.println("foodsRequest : " + foodsRequest.toString());
-
             String requestBody = mapper.writeValueAsString(foodsRequest);
             HttpEntity<String> request = new HttpEntity<>(requestBody, headers);
-
-            System.out.println("request : " + request);
 
             // when
             Long restaurantId = registeredRestaurant.id;
@@ -364,7 +358,7 @@ class FoodIntegrationTest {
                     "/restaurant/" + restaurantId + "/food/register",
                     request,
                     Object.class);
-
+            System.out.println("response.getStatusCode() : " + response.getStatusCode());
             // then
             assertTrue(
                     response.getStatusCode() == HttpStatus.BAD_REQUEST
@@ -440,9 +434,8 @@ class FoodIntegrationTest {
     @Getter
     @Setter
     @Builder
-    @NoArgsConstructor
     @AllArgsConstructor
-    @ToString
+    @NoArgsConstructor
     static class RestaurantDto {
         private Long id;
         private String name;
@@ -453,9 +446,8 @@ class FoodIntegrationTest {
     @Getter
     @Setter
     @Builder
-    @NoArgsConstructor
     @AllArgsConstructor
-    @ToString
+    @NoArgsConstructor
     static class FoodDto {
         private Long id;
         private String name;
