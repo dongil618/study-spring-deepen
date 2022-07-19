@@ -5,11 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import javax.validation.Valid;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import java.util.List;
-
 @Getter
 @NoArgsConstructor
 @ToString
