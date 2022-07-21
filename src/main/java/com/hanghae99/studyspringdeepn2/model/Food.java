@@ -25,12 +25,6 @@ public class Food {
     @Column(nullable = false)
     private Integer price;
 
-
-    public Food(FoodRequestDto requestDto) {
-        this.name = requestDto.getName();
-        this.price = requestDto.getPrice();
-    }
-
     public Food(Restaurant restaurant, String name, Integer price) {
         this.restaurant = restaurant;
         this.name = name;

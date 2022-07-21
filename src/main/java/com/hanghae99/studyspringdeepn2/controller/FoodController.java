@@ -1,7 +1,7 @@
 package com.hanghae99.studyspringdeepn2.controller;
 
 import com.hanghae99.studyspringdeepn2.dto.FoodRequestDto;
-import com.hanghae99.studyspringdeepn2.model.Food;
+import com.hanghae99.studyspringdeepn2.dto.FoodResponseDto;
 import com.hanghae99.studyspringdeepn2.service.FoodService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +21,7 @@ public class FoodController {
     }
 
     @GetMapping("/foods")
-    public List<Food> getFoods(@PathVariable Long restaurantId){
+    public List<FoodResponseDto> getFoods(@PathVariable Long restaurantId){
         return foodService.getFoods(restaurantId);
     }
 
