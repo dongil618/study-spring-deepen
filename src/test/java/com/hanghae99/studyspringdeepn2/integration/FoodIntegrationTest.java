@@ -113,7 +113,7 @@ class FoodIntegrationTest {
                     "/restaurant/" + restaurantId + "/food/register",
                     request,
                     Object.class);
-            System.out.println("response.getBody() : " + response.getBody());
+
             // then
             assertEquals(HttpStatus.OK, response.getStatusCode());
             assertNull(response.getBody());
@@ -141,7 +141,7 @@ class FoodIntegrationTest {
                     "/restaurant/" + restaurantId + "/food/register",
                     request,
                     Object.class);
-            System.out.println("response.getStatusCode() : " + response.getStatusCode());
+
             // then
             assertEquals(HttpStatus.OK, response.getStatusCode());
             assertNull(response.getBody());
@@ -282,6 +282,8 @@ class FoodIntegrationTest {
                     request,
                     Object.class);
 
+            System.out.println("입력된 음식명 중복에러 : " + response.getStatusCode());
+
             // then
             assertTrue(
                     response.getStatusCode() == HttpStatus.BAD_REQUEST
@@ -358,7 +360,7 @@ class FoodIntegrationTest {
                     "/restaurant/" + restaurantId + "/food/register",
                     request,
                     Object.class);
-            System.out.println("response.getStatusCode() : " + response.getStatusCode());
+
             // then
             assertTrue(
                     response.getStatusCode() == HttpStatus.BAD_REQUEST
@@ -434,8 +436,8 @@ class FoodIntegrationTest {
     @Getter
     @Setter
     @Builder
-    @AllArgsConstructor
     @NoArgsConstructor
+    @AllArgsConstructor
     static class RestaurantDto {
         private Long id;
         private String name;
@@ -446,8 +448,8 @@ class FoodIntegrationTest {
     @Getter
     @Setter
     @Builder
-    @AllArgsConstructor
     @NoArgsConstructor
+    @AllArgsConstructor
     static class FoodDto {
         private Long id;
         private String name;
